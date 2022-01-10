@@ -32,6 +32,8 @@ import { env } from 'jsdom-jscore-rn';
 
 import { useWindowDimensions } from 'react-native';
 import RenderHtml from 'react-native-render-html';
+import CounterStyle from '@jsamr/counter-style';
+
 
 
 const App: () => Node = () => {
@@ -82,6 +84,39 @@ const App: () => Node = () => {
   const { width } = useWindowDimensions();
 
 
+  const tagsStyles = {
+    body: {
+      padding: 15
+    },
+  };
+
+
+  const onElement = (el) => {
+    const { children, name } = el;
+    if (name === 'ul' && children && children.length) {
+        el.attribs["style"] = "list-style-type: green-tick;";
+    }
+  }
+
+  const customListStyleSpecs = {
+    'green-tick': {
+      type: 'textual',
+      counterStyleRenderer: CounterStyle.cyclic('✓').withSuffix(" ")
+    }
+  };
+  
+  const renderersProps = {
+    ul: {
+      markerBoxStyle: {
+        marginTop: 15
+      },
+      markerTextStyle: {
+        color: 'green',
+      },
+    },
+  };
+
+
 
   return (
     <SafeAreaView>
@@ -90,6 +125,11 @@ const App: () => Node = () => {
           <RenderHtml
             contentWidth={width}
             source={source}
+            tagsStyles={tagsStyles}
+            domVisitors={{onElement}} // first alter your html
+            customListStyleSpecs={customListStyleSpecs}
+            renderersProps={renderersProps}
+
           />
         </View>
       </ScrollView>
@@ -109,7 +149,28 @@ const initialDocument = {
       "content": [
         {
           "type": "text",
-          "text": "What is Nutrition?"
+          "text": "Lifestyle disorder related to obesity"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Polycystic Ovary Syndrome",
+          "marks": [
+            {
+              "type": "strong"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
         }
       ]
     },
@@ -118,7 +179,7 @@ const initialDocument = {
       "content": [
         {
           "type": "text",
-          "text": "Here are two statements."
+          "text": "Polycystic Ovary Syndrome, a lifestyle disorder in women, is found to be primarily associated with obesity (Barber et al, 2019). The underlying causes of PCOS are not well understood, and there are several factors believed to be related to the pathogenesis of PCOS. Genetics and family history are thought to be associated and other factors that can lead to insulin resistance, obesity from puberty."
         }
       ]
     },
@@ -127,7 +188,7 @@ const initialDocument = {
       "content": [
         {
           "type": "text",
-          "text": "Statement A - Nutrition is the food we eat."
+          "text": " "
         }
       ]
     },
@@ -136,7 +197,7 @@ const initialDocument = {
       "content": [
         {
           "type": "text",
-          "text": "Statement B - Nutrition is how food affects us."
+          "text": "On the other hand, PCOD is a condition developed by hormonal imbalance, and most of the time, nutritional and exercise interventions can help to reverse the ill effects of pcod."
         }
       ]
     },
@@ -145,7 +206,7 @@ const initialDocument = {
       "content": [
         {
           "type": "text",
-          "text": "So, what exactly is Nutrition?"
+          "text": " "
         }
       ]
     },
@@ -154,7 +215,7 @@ const initialDocument = {
       "content": [
         {
           "type": "text",
-          "text": "While most think Option A is true and don’t consider option B, let it be clear that Nutrition includes BOTH of these. If everyone begins to recognize that what is eaten matters as much as how it affects the body, everyone will live healthier lives."
+          "text": "The main organs affected by PCOS are the ovaries. Ovaries are the primary female reproductive organs and these may develop numerous small collections of fluid called follicles. But, due to hormonal disorder, these could turn into small cysts on the outer edges. In PCOS, the ovaries maybe 1.5 to 3 times larger than normal, and characteristically, have 12 or more follicles per ovary, measuring 2 to 9 mm in diameter."
         }
       ]
     },
@@ -163,7 +224,7 @@ const initialDocument = {
       "content": [
         {
           "type": "text",
-          "text": "“Small chemical components of food that are needed in adequate amounts by the body to grow, reproduce and lead a normal healthy life are nutrients.”"
+          "text": " "
         }
       ]
     },
@@ -172,12 +233,115 @@ const initialDocument = {
       "content": [
         {
           "type": "text",
-          "text": "Everything that is consumed consists of nutrients. Broadly speaking, there are 3 types of nutrients;"
+          "text": "The symptoms of PCOS include excess hair growth, acne, and obesity. This can also lead to missed or irregular menstrual periods and make it harder for women to conceive. Losing weight can be extremely beneficial to reduce the severity of this condition (Barber et al, 2019)."
         }
       ]
     },
     {
-      "type": "orderedList",
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " ",
+          "marks": [
+            {
+              "type": "em"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Hyperlipidemia",
+          "marks": [
+            {
+              "type": "strong"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "People who are overweight or obese are at a greater risk of developing hyperlipidemia (M Moyen, 2010). Hyperlipidemia is an umbrella term that refers to any of several acquired or genetic disorders that result in a high level of lipids (fats, cholesterol and triglycerides) circulating in the blood, and the reason for their abnormally raised levels is usually sighted to be a poor lifestyle and food choices apart from inheritance. "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Type II Diabetes Mellitus",
+          "marks": [
+            {
+              "type": "strong"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "This is a chronic disorder characterized by raised levels of sugar in the blood. This disease affects the way a person’s body processes glucose or blood sugar. It is also known as adult-onset diabetes as it usually gets detected in middle and late adulthood. In the US, about 87% of adults with diabetes are overweight or obese. It is proposed that being overweight causes inflammation which makes the cells resistant to the hormone insulin, which further signals cells to take up glucose from the blood (NIH Health Information)."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A few symptoms of Type II Diabetes include excessive hunger, thirst, and urination, along with weight loss and increased susceptibility to fungal infection."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "text",
+          "text": "Metabolic Syndrome",
+          "marks": [
+            {
+              "type": "strong"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Metabolic Syndrome is a cluster or group of risk factors that increase the chances of developing diseases such as diabetes, stroke, and disorders related to the heart. A few of its characteristics are"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
       "content": [
         {
           "type": "listItem",
@@ -187,7 +351,7 @@ const initialDocument = {
               "content": [
                 {
                   "type": "text",
-                  "text": "Macronutrients - Proteins, Fats, and Carbohydrates"
+                  "text": "Excess body fat"
                 }
               ]
             }
@@ -201,7 +365,7 @@ const initialDocument = {
               "content": [
                 {
                   "type": "text",
-                  "text": "Micronutrients - Vitamins and Minerals"
+                  "text": "Insulin resistance & hyperinsulinemia"
                 }
               ]
             }
@@ -215,7 +379,35 @@ const initialDocument = {
               "content": [
                 {
                   "type": "text",
-                  "text": "Inorganic Nutrients - Water and Oxygen"
+                  "text": "High blood sugar"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Abnormal cholesterol"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "High triglyceride levels"
                 }
               ]
             }
@@ -237,371 +429,7 @@ const initialDocument = {
       "content": [
         {
           "type": "text",
-          "text": "All of these nutrients have a definite role and are obtained from different food sources."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "The health of the individual is influenced by the utilization of nutrients is called the nutritional status of an individual. The nutritional status can be determined through medical checkups, by the process of collecting and interpreting dietary and medical history. The nutritional status of a person can be good, fair, or poor. "
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Nutritional assessment aids in identifying under-nutrition, overnutrition (more on this in a while), nutritional deficiencies, individuals at the risk of developing malnutrition, individuals at the risk of developing nutritionally related diseases, the resources available to assist them to overcome nutritional problems."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Curiosity about nutrition is not a new phenomenon. Scientists have been studying food and nutrition for centuries. However, the landscape of Modern Nutrition has developed in recent years. During the initial years of the 20th Century, the discovery, isolation, and synthesis of micronutrients were performed. The goal was to study diseases of deficiency."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "With this, the advent of nutrition science began to take shape. It is not shocking to learn that widespread diseases were a starting point of most nutrition-centered research. More research was conducted about non-communicable diseases and how nutrition plays a role in them. Over the years, nutrition scientists realized that it is not nutrients in isolation that need to be studied, it is food and diet patterns in general. This is because silent epidemics such as malnutrition, obesity, and other food-related lifestyle diseases becoming more and more common."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Since the 1990s, the emphasis has been placed on scientific, evidence-based research. Therefore, a lot more large-scale nutrition studies, randomized clinical trials, cohort studies, etc. are seen. But the reality is, despite progress across all spheres in lives, diet and food patterns are still driven by primal urges and needs."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Every generation comes with its own set of health hazards. While human ancestors struggled to live longer, today, people are living longer but are crippled by lifestyle disorders. What does this mean?"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "It means that the ‘one size fits all approach does not work when it comes to nutrition. It needs to be tweaked to the needs of the present situation and should be made sustainable. And of course, it should keep the diseases at bay."
-        }
-      ]
-    },
-    {
-      "type": "heading",
-      "attrs": {
-        "level": 3
-      },
-      "content": [
-        {
-          "type": "text",
-          "text": "What is Optimum Nutrition?"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "When the food provides the right amount of nutrients, the diet can be sustained for a long time, and it is safe to say that the nutrition is optimum when one is reasonably healthy. However, it is important to note that optimum nutrition depends entirely on the goal."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Now, think about the grade 1 or grade 2 textbooks. Remember that chapter on food groups and a balanced diet?"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Remember seeing something like this? Okay, now what if one was told that this is not exactly optimal?"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "A balanced diet will make sure that one gets the right amount of macronutrients as per individuals goals. What may be a balanced and optimal diet for one person may be counterproductive for another. This is why we must stop asking others for a diet plan."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Imagine planning a holiday. Now, there are many things to consider like:"
-        }
-      ]
-    },
-    {
-      "type": "orderedList",
-      "content": [
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "What is the purpose of the holiday- Leisure/ Business"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "What kind of destination suits most of the plans?"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "How much money can be spent?"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Now think about this - if so much thought can be put into a holiday, why not put some more thought into daily nutrition?"
-        }
-      ]
-    },
-    {
-      "type": "heading",
-      "attrs": {
-        "level": 3
-      },
-      "content": [
-        {
-          "type": "text",
-          "text": "Why do we need to know about Nutrition?",
-          "marks": [
-            {
-              "type": "strong"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Nutrients are essential elements required for the normal functioning of our body and when taken in excess, or deficiency can result in different physiological and psychological conditions."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Types of Nutrition:"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Good nutrition: “Good nutrition is the state in which a person gets all the nutrients in the correct amount and proportion and some nutrients are stored in the body after meeting all the body requirements”. This is known as optimum or adequate nutrition and it helps to maintain good health."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Malnutrition: Malnutrition means an undesirable quantity and kind of nutrition."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Malnutrition is that state of ill-health which may be caused by the deficiency or excess of one or more essential nutrients in the body. An unhealthy environment also causes malnutrition. The physical, mental, and intellectual well-being of a person is affected due to malnourishment."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "A malnourished person is physically, mentally, socially, and emotionally sick is of two types:"
-        }
-      ]
-    },
-    {
-      "type": "orderedList",
-      "content": [
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Undernutrition",
-                  "marks": [
-                    {
-                      "type": "strong"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "text": " - Undernutrition is a deficiency of one or more nutrients, and in that state of nutrition in which the quality and quantity of food is not sufficient for the body and is deficient in one or more nutrients. An undernourished person manifests symptoms of deficiencies and feels unwell. Poor body weight, poor resistance to infection, weakness, and general ill-health are the symptoms of undernourishment."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "Overnutrition",
-                  "marks": [
-                    {
-                      "type": "strong"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "text": " - Overnutrition is an excess of one or more nutrients and is a state of nutrition in which the intake of nutrients is more than what the body needs quantitatively as well as qualitatively causing adverse effects on the body."
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "A person does not associate someone who weighs 100 kg with the word - MALNOURISHED. "
-        }
-      ]
-    },
-    {
-      "type": "panel",
-      "attrs": {
-        "panelType": "info"
-      },
-      "content": [
-        {
-          "type": "paragraph",
-          "content": [
-            {
-              "type": "text",
-              "text": "However, "
-            },
-            {
-              "type": "text",
-              "text": "even those with obesity can be malnourished ",
-              "marks": [
-                {
-                  "type": "strong"
-                }
-              ]
-            },
-            {
-              "type": "text",
-              "text": "(Via 2012; C. Fu et al, 2016)."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "Shocking, right? Research suggests that nutritional deficiencies are more likely to get overlooked in people who are obese (Lasocki, 2015). The reason may be that obese or overweight people get more than enough calories, however not enough micronutrients. Hence, poor food choices can provide ample calories but not the right nutrition."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "WHO recognizes malnutrition, in every form, as a significant threat to human health. Humans are today living with the double burden of malnutrition in the form of undernutrition and being overweight."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "So whether someone is lean or overweight, nutrition knowledge is important for anyone and everyone."
+          "text": "Obesity, therefore, is both a cause and a sign of Metabolic Syndrome (Kaur, 2014). Metabolic syndrome is not a disease in itself. Having just one of these conditions doesn't imply metabolic syndrome but it implies that if a person develops more of these conditions, he has a greater risk of developing some serious complications. Having understood all these lifestyle-related disorders, why not go ahead and see what all precautions should be taken to prevent them!"
         }
       ]
     }
